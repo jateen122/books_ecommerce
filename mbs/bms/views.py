@@ -27,10 +27,21 @@ def delete_book(request, id):
 
 
 def update_book(request, id):
-    queryset = Book.objects.get (id=id)
-    context ={'book':queryset}
-    return render(request,'updatebooks.html',context)
+    book = get_object_or_404(Book, id=id)
 
+    if request.method == "POST":
+        book.book_name = request.POST.get('book_name')
+        book.book_description = request.POST.get('book_description')
+
+        # update image only if new one is uploaded
+        if request.FILES.get('book_image'):
+            book.book_image = request.FILES.get('book_image')
+
+        book.save()
+        return redirect('books')   # better than '/'
+
+    context = {'book': book}
+    return render(request, 'updatebooks.html', context)
 
 def login_page(request):
     return render(request, 'login.html')
