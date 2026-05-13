@@ -134,3 +134,5 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'jatin.shrestha.a23@icp.edu.np'
 EMAIL_HOST_PASSWORD = 'xrarrcxijgdndqvf'
+
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
